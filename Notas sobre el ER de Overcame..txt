@@ -1,0 +1,1 @@
+Hacer una generalización con coche de alquiler y coche de segunda mano, servicios están con empleado y coche o cliente, poner atributos a las relaciones(es decir, las cantidades y fechas entre otros posibles). Tengo las cardinalidades al revés(arreglarlo), habrá mas cosas.
