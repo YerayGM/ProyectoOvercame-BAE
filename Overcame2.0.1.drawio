@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0 (Edition ms_store)" version="24.8.1">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="1810" dy="1668" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="2496" dy="2074" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -60,10 +60,8 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="90" y="210" />
-              <mxPoint x="80" y="210" />
-              <mxPoint x="70" y="210" />
-              <mxPoint x="70" y="230" />
-              <mxPoint x="80" y="230" />
+              <mxPoint x="100" y="210" />
+              <mxPoint x="100" y="230" />
               <mxPoint x="90" y="230" />
               <mxPoint x="90" y="250" />
             </Array>
@@ -165,7 +163,7 @@
         <mxCell id="CsL8E8aFtRLFVdAylu72-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" parent="1" source="CsL8E8aFtRLFVdAylu72-40" target="CsL8E8aFtRLFVdAylu72-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="CsL8E8aFtRLFVdAylu72-40" value="Contrata" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+        <mxCell id="CsL8E8aFtRLFVdAylu72-40" value="Contrata a" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="190" y="280" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="CsL8E8aFtRLFVdAylu72-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="CsL8E8aFtRLFVdAylu72-41" target="CsL8E8aFtRLFVdAylu72-8" edge="1">
@@ -186,7 +184,7 @@
         <mxCell id="CsL8E8aFtRLFVdAylu72-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="CsL8E8aFtRLFVdAylu72-42" target="CsL8E8aFtRLFVdAylu72-12" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="CsL8E8aFtRLFVdAylu72-42" value="Contrata" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+        <mxCell id="CsL8E8aFtRLFVdAylu72-42" value="Contrata un" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="45" y="360" width="90" height="40" as="geometry" />
         </mxCell>
         <mxCell id="CsL8E8aFtRLFVdAylu72-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="CsL8E8aFtRLFVdAylu72-43" target="CsL8E8aFtRLFVdAylu72-8" edge="1">
