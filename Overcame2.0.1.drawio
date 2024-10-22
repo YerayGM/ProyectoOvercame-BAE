@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0 (Edition ms_store)" version="24.8.1">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="2496" dy="2074" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="1810" dy="1668" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -479,20 +479,20 @@
         <mxCell id="JXQCX-pXFuUWfHpVdgid-42" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" source="JXQCX-pXFuUWfHpVdgid-37" target="CsL8E8aFtRLFVdAylu72-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="JXQCX-pXFuUWfHpVdgid-37" value="Id-Cliente" style="ellipse;whiteSpace=wrap;html=1;align=center;fontStyle=4;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="495" y="315" width="65" height="20" as="geometry" />
+        <mxCell id="JXQCX-pXFuUWfHpVdgid-37" value="Id-Tienda" style="ellipse;whiteSpace=wrap;html=1;align=center;fontStyle=4;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="510" y="306.5" width="65" height="20" as="geometry" />
         </mxCell>
         <mxCell id="JXQCX-pXFuUWfHpVdgid-43" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" source="JXQCX-pXFuUWfHpVdgid-38" target="CsL8E8aFtRLFVdAylu72-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="JXQCX-pXFuUWfHpVdgid-38" value="Nombre" style="ellipse;whiteSpace=wrap;html=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="495" y="335" width="50" height="20" as="geometry" />
+        <mxCell id="JXQCX-pXFuUWfHpVdgid-38" value="Direccion" style="ellipse;whiteSpace=wrap;html=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="530" y="326.5" width="50" height="20" as="geometry" />
         </mxCell>
         <mxCell id="JXQCX-pXFuUWfHpVdgid-44" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" source="JXQCX-pXFuUWfHpVdgid-39" target="CsL8E8aFtRLFVdAylu72-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="JXQCX-pXFuUWfHpVdgid-39" value="DNI" style="ellipse;whiteSpace=wrap;html=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="470" y="352.5" width="40" height="15" as="geometry" />
+        <mxCell id="JXQCX-pXFuUWfHpVdgid-39" value="Email" style="ellipse;whiteSpace=wrap;html=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="545" y="347.5" width="40" height="15" as="geometry" />
         </mxCell>
         <mxCell id="JXQCX-pXFuUWfHpVdgid-48" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" source="JXQCX-pXFuUWfHpVdgid-45" target="CsL8E8aFtRLFVdAylu72-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -767,6 +767,12 @@
         </mxCell>
         <mxCell id="JXQCX-pXFuUWfHpVdgid-160" value="Fecha_Contrato" style="ellipse;whiteSpace=wrap;html=1;align=center;fillColor=#f5f5f5;strokeColor=#666666;gradientColor=#b3b3b3;direction=east;" parent="1" vertex="1">
           <mxGeometry x="423.75" y="700" width="100" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="Nn_GcHT7Je9zV0mcnBFL-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="Nn_GcHT7Je9zV0mcnBFL-1" target="CsL8E8aFtRLFVdAylu72-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Nn_GcHT7Je9zV0mcnBFL-1" value="Telefono" style="ellipse;whiteSpace=wrap;html=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="502.5" y="350" width="45" height="25" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
