@@ -332,7 +332,7 @@
         <mxCell id="CsL8E8aFtRLFVdAylu72-128" value="1:N" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="-205" y="720" width="40" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="CsL8E8aFtRLFVdAylu72-129" value="1:N:M" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="CsL8E8aFtRLFVdAylu72-129" value="N:M:P" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="535" y="410" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="CsL8E8aFtRLFVdAylu72-131" value="(1,n)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
@@ -613,7 +613,7 @@
         <mxCell id="JXQCX-pXFuUWfHpVdgid-87" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" source="JXQCX-pXFuUWfHpVdgid-86" target="CsL8E8aFtRLFVdAylu72-19" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="JXQCX-pXFuUWfHpVdgid-86" value="Id-Servicio" style="ellipse;whiteSpace=wrap;html=1;align=center;fontStyle=4;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+        <mxCell id="JXQCX-pXFuUWfHpVdgid-86" value="Id-Seguro" style="ellipse;whiteSpace=wrap;html=1;align=center;fontStyle=4;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="-238.12" y="480" width="62.5" height="19" as="geometry" />
         </mxCell>
         <mxCell id="JXQCX-pXFuUWfHpVdgid-96" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" source="JXQCX-pXFuUWfHpVdgid-91" target="CsL8E8aFtRLFVdAylu72-17" edge="1">
@@ -773,6 +773,12 @@
         </mxCell>
         <mxCell id="Nn_GcHT7Je9zV0mcnBFL-1" value="Telefono" style="ellipse;whiteSpace=wrap;html=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="502.5" y="350" width="45" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="Nn_GcHT7Je9zV0mcnBFL-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="Nn_GcHT7Je9zV0mcnBFL-3" target="CsL8E8aFtRLFVdAylu72-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Nn_GcHT7Je9zV0mcnBFL-3" value="Direccion" style="ellipse;whiteSpace=wrap;html=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-5" y="735" width="60" height="25" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
