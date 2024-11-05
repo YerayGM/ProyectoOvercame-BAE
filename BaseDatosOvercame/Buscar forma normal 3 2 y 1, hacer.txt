@@ -1,0 +1,1 @@
+Buscar forma normal 3 2 y 1, hacer análisis de integridad(delete cascade, etc) y nada mas.
