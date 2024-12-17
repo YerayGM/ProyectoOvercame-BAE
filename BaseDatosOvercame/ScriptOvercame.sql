@@ -97,7 +97,7 @@ Create table Entrega (
     IdCoche int,
     IdProducto int,
     FechaEntrega date not null,
-    Cantidad smallint unsigned not null check (Cantidad between 1 and 10000),
+    Cantidad smallint unsigned not null check (Cantidad between 0 and 10000),
     Primary key (IdProveedor, IdCoche, IdProducto, FechaEntrega),
     Foreign key (IdProveedor) references Proveedor(IdProveedor) on delete restrict on update cascade,
     Foreign key (IdCoche) references Coche(IdCoche) on delete restrict on update cascade,
@@ -177,10 +177,10 @@ Create table Contratar (
 Create table Reserva (
     IdCliente int,
     IdCoche int,
-    FechaInicio date not null,
+    Fechainicio date not null,
     Duracion smallint unsigned not null check (Duracion between 1 and 10000),
     PrecioAlquiler decimal(10, 2) not null check (PrecioAlquiler between 0 and 100000),
-    Primary key (IdCliente, IdCoche, FechaInicio),
+    Primary key (IdCliente, IdCoche, Fechainicio),
     Foreign key (IdCliente) references Cliente(IdCliente) on delete restrict on update cascade,
     Foreign key (IdCoche) references Coche(IdCoche) on delete restrict on update cascade
 );
@@ -194,7 +194,7 @@ Create table Organiza (
     Foreign key (IdProducto) references Productos(IdProducto) on delete restrict on update cascade
 );
 
--- Inserción de productos
+-- inserción de productos
 Insert into Productos (Nombre, Precio) values
 ('Aceite de Motor', 25.99),
 ('Filtro de Aire', 15.50),
@@ -205,7 +205,8 @@ Insert into Productos (Nombre, Precio) values
 Insert into Servicio (Tipo, Precio, Duracion) values 
 ('Cambio de Aceite', 50.00, 30),
 ('Alineación de Ruedas', 70.00, 45),
-('Revisión General', 120.00, 60);
+('Revisión General', 120.00, 60),
+('Cambio de Ruedas', 100.00, 60);
 
 Insert into Empleado (Nombre, DNI, Direccion) values 
 ('Juan Pérez', '12345678A', 'Calle 1, Ciudad A'),
@@ -215,64 +216,91 @@ Insert into Organiza (IdEmpleado, IdProducto) values
 (1, 1),
 (2, 2);
 
--- Inserción de coches
+-- inserción de coches
 Insert into Coche (IdCoche, Modelo, Marca, Año, Color) values
 (1, 'Model S', 'Tesla', 2021, 'Negro'),
 (2, 'Mustang', 'Ford', 2018, 'Rojo'),
 (3, 'Civic', 'Honda', 2020, 'Azul'),
-(4, 'Corsa', 'Opel', 2019, 'Blanco');
+(4, 'Corsa', 'Opel', 2019, 'Blanco'),
+(5, 'astra', 'Vauxhall', year(current_date), 'Verde');
 
--- Inserción de clientes
+-- inserción de clientes
 Insert into Cliente (IdCliente, Nombre, DNI, Direccion, Telefono) values
 (1, 'Carlos Sánchez', '11122233C', 'Calle del Sol 44', '622345678'),
 (2, 'Ana García', '44455566D', 'Avenida Luna 99', '633567890'),
 (3, 'Lucía Martínez', '55566677E', 'Calle Esperanza 88', '644112233');
 
--- Inserción de reservas
-Insert into Reserva (IdCliente, IdCoche, FechaInicio, Duracion, PrecioAlquiler) values
+-- inserción de reservas
+Insert into Reserva (IdCliente, IdCoche, Fechainicio, Duracion, PrecioAlquiler) values
 (1, 1, '2024-01-01', 7, 150.00),
 (1, 1, '2024-04-12', 5, 200.00),
 (2, 2, '2024-01-05', 3, 75.00);
 
--- Inserción de proveedores
+-- inserción de proveedores
 Insert into Proveedor (Nombre, Telefono, Email, Direccion) values
-('Proveedor A', '622123456', 'proveedorA@example.com', 'Calle Industrial 12'),
+('Proveedor A', '622123456', 'proveedorA@example.com', 'Calle industrial 12'),
 ('Proveedor B', '633987654', 'proveedorB@example.com', 'Avenida Comercial 34'),
 ('Proveedor C', '644112233', 'proveedorC@example.com', 'Calle Central 56');
 
--- Inserción de entregas de productos por proveedores
+-- inserción de entregas de productos por proveedores
 Insert into Entrega (IdProveedor, IdCoche, IdProducto, FechaEntrega, Cantidad) values
 (1, 1, 1, '2024-01-10', 5), -- Proveedor A entregó 5 Aceites de Motor para el coche Model S
 (1, 2, 2, '2024-01-12', 10), -- Proveedor A entregó 10 Filtros de Aire para el coche Mustang
 (2, 3, 3, '2024-02-15', 15), -- Proveedor B entregó 15 Bujías para el coche Civic
-(3, 4, 4, '2024-03-20', 7); -- Proveedor C entregó 7 Llantas para el coche Corsa
+(3, 4, 4, '2024-03-20', 7), -- Proveedor C entregó 7 Llantas para el coche Corsa
+(2, 5, 1, '2024-03-14', 0); -- Proveedor B no entrego "Aceites de Motor" para el Vauxhall Astra
 
--- 3. CONSULTAS
--- 3.1 INNER JOIN: Ver qué empleados están organizando qué productos.
-Select E.Nombre as Empleado, P.Nombre as Producto from Empleado E
+-- Consultas.
+-- inner join: 
+-- Ver qué empleados organizaron productos de un precion en especifico.
+Select E.Nombre as Empleado, P.Nombre as Producto, P.Precio from Empleado E
 inner join Organiza O on E.IdEmpleado = O.IdEmpleado
-inner join Productos P on O.IdProducto = P.IdProducto;
+inner join Productos P on O.IdProducto = P.IdProducto where P.Precio > 20 and P.Precio < 50;
 
--- LEFT JOIN: Ver todos los coches y los proveedores que los entregaron
-Select C.Modelo, C.Marca, P.Nombre as Proveedor from Coche C
-left join Entrega E on C.IdCoche = E.IdCoche
-left join Proveedor P on E.IdProveedor = P.IdProveedor;
+-- Ver los productos entregados por proveedores a coches especificos.
+Select P.Nombre as Producto, C.Modelo as Coche, Pr.Nombre as Proveedor, E.FechaEntrega, E.Cantidad from Entrega E
+inner join Productos P on E.IdProducto = P.IdProducto
+inner join Coche C on E.IdCoche = C.IdCoche
+inner join Proveedor Pr on E.IdProveedor = Pr.IdProveedor where E.Cantidad > 0;
 
--- GROUP BY: Calcular el total de productos entregados por cada proveedor
-Select P.Nombre as Proveedor, SUM(E.Cantidad) as TotalProductos
-from Proveedor P
-inner join Entrega E on P.IdProveedor = E.IdProveedor group by P.Nombre;
+-- Left/right join:
+-- Cuantas reservas ha tenido cada coche incluidos los que no tienen reserva.
+Select COUNT(R.IdCoche), C.IdCoche, C.Modelo, C.Marca from Reserva R
+right join Coche C on C.IdCoche = R.IdCoche group by IdCoche;
 
--- Subconsulta: Clientes que realizaron más de una reserva
-Select C.Nombre from Cliente C where (select COUNT(*) from Reserva R where R.IdCliente = C.IdCliente) > 1;
+-- Ver productos organizados por empleados y el total organizados.
+Select E.Nombre as Empleado, COUNT(O.IdProducto) as TotalProductos from Empleado E
+left join Organiza O on E.IdEmpleado = O.IdEmpleado group by E.Nombre;
 
--- 3.5 INSERT/UPDATE/DELETE: Agregar, actualizar y eliminar.
-Insert into Cliente (Nombre, DNI, Direccion, Telefono) values 
-('Lucía Martínez', '55566678E', 'Calle Esperanza 88', '644112233');
+-- group by.
+-- Ver todas las reservas realizadas por clientes incluido los clientes que no han reservado.
+Select C.Nombre as Cliente, COUNT(R.IdCoche) as TotalReservas from Cliente C
+left join Reserva R on C.IdCliente = R.IdCliente
+group by C.Nombre;
 
-Update Productos set Precio = 20.00 where Nombre = 'Filtro de Aire';
+-- Ver el promedio de lo que cuesta los servicios segun su tipo.
+Select S.Tipo, avg(S.Precio) as CostoPromedio from Servicio S group by S.Tipo;
 
-Delete from Servicio where Tipo = 'Revisión General';	
+-- Subconsulta.
+-- Ver que coches han sido alquilados mas de una vez.
+Select C.Modelo, C.Marca from Coche C
+where (select COUNT(*) from Reserva R where R.IdCoche = C.IdCoche) > 1;
+
+-- Ver proovedores que han entregado mas de 10 productos en total.
+Select P.Nombre from Proveedor P
+where (select SUM(E.Cantidad) from Entrega E where E.IdProveedor = P.IdProveedor) > 10;
+
+-- insert/Update/Delete.
+-- Inserta un cliente culla direccion es la misma de Carlos Sanchez.
+Insert into Cliente (Nombre, DNI, Direccion, Telefono)
+values ('Roberto Gómez', '66677788G', (select Direccion from Cliente C where Nombre = 'Carlos Sánchez'), '655123456');
+
+-- Update el servicio con el precio promedio con todos los servicio de cambio.
+Update Servicio SET Precio = (select avg(Temp.Precio) from (select Precio from Servicio where Tipo like 'Cambio%') as Temp)
+where Tipo = 'Alineación de Ruedas';
+
+-- Borra el Producto el cual no ha sido entregado.
+Delete from Productos where IdProducto not in (select IdProducto from Entrega);
 
 -- Verificar los datos de las tablas relevantes
 Select * from Proveedor;
@@ -280,3 +308,5 @@ Select * from Entrega;
 Select * from Coche;
 Select * from Cliente;
 Select * from Reserva;
+Select * from Productos;
+Select * from Servicios;
