@@ -1,63 +1,77 @@
--- Seleccionar la base de datos
-Use OvercameDB;
+-- Clasificación de Usuarios y Privilegios
+-- Usuario Administrador: Acceso completo.
+create user 'admin'@'localhost' identified by 'admin123';
+grant all privileges on OvercameDB.* to 'admin'@'localhost';
 
--- Creación de roles y usuarios
--- Crear el rol de administrador
-Drop role if exists Administrador;
-Create role if not exists Administrador;
-Grant all privileges on OvercameDB.* to Administrador;
+-- Usuario Empleado: Lectura y gestión de productos y reservas.
+create user 'empleado'@'localhost' identified by 'empleado123';
+grant select, insert, update on OvercameDB.Productos to 'empleado'@'localhost';
+grant select, insert, update on OvercameDB.Reserva to 'empleado'@'localhost';
 
--- Crear el rol de gestor de servicios
-Drop role if exists GestorServicios;
-Create role if not exists GestorServicios;
-Grant select, insert, update on OvercameDB.Servicio to GestorServicios;
-Grant select, insert on OvercameDB.Empleado to GestorServicios;
-Grant select on OvercameDB.Productos to GestorServicios;
+-- Usuario Cliente: Lectura de productos y creación de reservas.
+create user 'cliente'@'localhost' identified by 'cliente123';
+grant select on OvercameDB.Productos to 'cliente'@'localhost';
+grant select, insert on OvercameDB.Reserva to 'cliente'@'localhost';
 
--- Crear el rol de proveedor
-Drop role if exists Proveedor;
-Create role if not exists Proveedor;
-Grant select, insert, update on OvercameDB.Proveedor to Proveedor;
-Grant select, insert, update on OvercameDB.Entrega to Proveedor;
+-- Procedimiento Almacenado: Resumen de reservas por cliente
+DELIMITER $$
+create procedure ResumenReservasPorCliente()
+begin
+  declare done int default 0;
+  declare clienteId int;
+  declare nombreCliente varchar(100);
+  declare totalReservas int;
+  declare cursorClientes cursor for select IdCliente, Nombre from Cliente;
+  declare continue handler for not found set done = 1;
 
--- Crear el rol de cliente
-Drop role if exists Cliente;
-Create role if not exists Cliente;
-Grant select, insert on OvercameDB.Reserva to Cliente;
-Grant select on OvercameDB.Cliente to Cliente;
+  open cursorClientes;
+  read_loop: loop
+    fetch cursorClientes into clienteId, nombreCliente;
+    if done then
+      leave read_loop;
+    end if;
+    set totalReservas = (select COUNT(*) from Reserva where IdCliente = clienteId);
+    select CONCAT('Cliente: ', nombreCliente, ' - total Reservas: ', totalReservas) as Resumen;
+  end loop;
+  close cursorClientes;
+end $$
+DELIMITER ;
 
--- Creación de usuarios y asignación de roles
--- Usuario administrador
-Create user if not exists 'admin_user'@'localhost' identified by 'AdminPass123';
-Grant Administrador to 'admin_user'@'localhost';
-Set default role Administrador to 'admin_user'@'localhost';
+-- Función Almacenada: Calcular el total de reservas para un coche
+DELIMITER $$
+create function totalReservasCoche(cocheId int) returns int
+deterministic
+begin
+  declare total int;
+  set total = (select COUNT(*) from Reserva where IdCoche = cocheId);
+  return total;
+end $$
+DELIMITER ;
 
--- Usuario gestor de servicios
-Create user if not exists 'gestor_user'@'localhost' identified by 'GestorPass123';
-Grant GestorServicios to 'gestor_user'@'localhost';
-Set default role GestorServicios to 'gestor_user'@'localhost';
+-- Trigger: Validar precios antes de insertar en la tabla Productos
+DELIMITER $$
+create trigger ValidarPrecioProducto
+before insert on Productos
+for each row
+begin
+  if new.Precio <= 0 then
+    signal sqlstate '45000' set MESSAGE_TEXT = 'El precio del producto debe ser mayor a 0.';
+  end if;
+end $$
+DELIMITER ;
 
--- Usuario proveedor
-Create user if not exists 'proveedor_user'@'localhost' identified by 'ProveedorPass123';
-Grant Proveedor to 'proveedor_user'@'localhost';
-Set default role Proveedor to 'proveedor_user'@'localhost';
+-- Evento: Actualizar precios promedio de servicios cada semana
+DELIMITER $$
+create event ActualizarPromedioServicios
+on schedule every 1 week
+do
+begin
+  update Servicio
+  set Precio = (select avg(Temp.Precio) from (select Precio from Servicio) as Temp);
+end $$
+DELIMITER ;
 
--- Usuario cliente
-Create user if not exists 'cliente_user'@'localhost' identified by 'ClientePass123';
-Grant Cliente to 'cliente_user'@'localhost';
-Set default role Cliente to 'cliente_user'@'localhost';
-
--- Configuración de caducidad de contraseñas
-Alter user 'admin_user'@'localhost' password expire interval 90 day;
-Alter user 'gestor_user'@'localhost' password expire interval 90 day;
-Alter user 'proveedor_user'@'localhost' password expire interval 90 day;
-Alter user 'cliente_user'@'localhost' password expire interval 90 day;
-
--- Revisión de permisos
-Show grants for 'admin_user'@'localhost';
-Show grants for 'gestor_user'@'localhost';
-Show grants for 'proveedor_user'@'localhost';
-Show grants for 'cliente_user'@'localhost';
-
--- Eliminación de cuentas obsoletas
-Drop user if exists 'old_user'@'localhost';
+-- Verificación de usuarios y privilegios
+show grants for 'admin'@'localhost';
+show grants for 'empleado'@'localhost';
+show grants for 'cliente'@'localhost';

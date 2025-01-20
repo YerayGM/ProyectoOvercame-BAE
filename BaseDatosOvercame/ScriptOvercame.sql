@@ -87,7 +87,7 @@ Create table Coche (
     IdCoche int primary key not null auto_increment,
     Modelo varchar(100) not null check (Modelo rlike '^[A-Za-z0-9 ]+$'),
     Marca varchar(100) not null check (Marca rlike '^[A-Za-z ]+$'),
-    Año smallint unsigned check (Año between 1886 and 2024),
+    Año smallint unsigned check (Año between 1886 and 2025),
     Color varchar(50)
 );
 
@@ -309,4 +309,4 @@ Select * from Coche;
 Select * from Cliente;
 Select * from Reserva;
 Select * from Productos;
-Select * from Servicios;
+Select * from Servicio;
