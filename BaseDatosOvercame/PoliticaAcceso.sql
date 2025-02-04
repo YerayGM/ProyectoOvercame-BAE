@@ -116,8 +116,7 @@ declare total decimal;
 end$$
 delimiter $$
 
-event schedule 
 -- Verificación de usuarios y privilegios
 show grants for 'admin'@'localhost';
 show grants for 'empleado'@'localhost';
-show grants for 'cliente'@'localhost';
+show grants for 'cliente'@'localhost';y
