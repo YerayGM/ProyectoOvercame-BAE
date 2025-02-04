@@ -88,7 +88,8 @@ Create table Coche (
     Modelo varchar(100) not null check (Modelo rlike '^[A-Za-z0-9 ]+$'),
     Marca varchar(100) not null check (Marca rlike '^[A-Za-z ]+$'),
     Año smallint unsigned check (Año between 1886 and 2025),
-    Color varchar(50)
+    Color varchar(50),
+    PrecioAlquiler decimal 
 );
 
 -- Relación "Entrega" entre Proveedor, Coche y Productos
@@ -179,7 +180,7 @@ Create table Reserva (
     IdCoche int,
     Fechainicio date not null,
     Duracion smallint unsigned not null check (Duracion between 1 and 10000),
-    PrecioAlquiler decimal(10, 2) not null check (PrecioAlquiler between 0 and 100000),
+    PrecioAlquiler decimal(10, 2) check (PrecioAlquiler between 0 and 100000),
     Primary key (IdCliente, IdCoche, Fechainicio),
     Foreign key (IdCliente) references Cliente(IdCliente) on delete restrict on update cascade,
     Foreign key (IdCoche) references Coche(IdCoche) on delete restrict on update cascade
@@ -217,12 +218,12 @@ Insert into Organiza (IdEmpleado, IdProducto) values
 (2, 2);
 
 -- inserción de coches
-Insert into Coche (IdCoche, Modelo, Marca, Año, Color) values
-(1, 'Model S', 'Tesla', 2021, 'Negro'),
-(2, 'Mustang', 'Ford', 2018, 'Rojo'),
-(3, 'Civic', 'Honda', 2020, 'Azul'),
-(4, 'Corsa', 'Opel', 2019, 'Blanco'),
-(5, 'astra', 'Vauxhall', year(current_date), 'Verde');
+Insert into Coche (IdCoche, Modelo, Marca, Año, Color, PrecioAlquiler) values
+(1, 'Model S', 'Tesla', 2021, 'Negro', 30),
+(2, 'Mustang', 'Ford', 2018, 'Rojo', 23),
+(3, 'Civic', 'Honda', 2020, 'Azul', 47.54),
+(4, 'Corsa', 'Opel', 2019, 'Blanco', 69),
+(5, 'astra', 'Vauxhall', year(current_date), 'Verde', 0);
 
 -- inserción de clientes
 Insert into Cliente (IdCliente, Nombre, DNI, Direccion, Telefono) values
@@ -231,10 +232,10 @@ Insert into Cliente (IdCliente, Nombre, DNI, Direccion, Telefono) values
 (3, 'Lucía Martínez', '55566677E', 'Calle Esperanza 88', '644112233');
 
 -- inserción de reservas
-Insert into Reserva (IdCliente, IdCoche, Fechainicio, Duracion, PrecioAlquiler) values
-(1, 1, '2024-01-01', 7, 150.00),
-(1, 1, '2024-04-12', 5, 200.00),
-(2, 2, '2024-01-05', 3, 75.00);
+Insert into Reserva (IdCliente, IdCoche, Fechainicio, Duracion) values
+(1, 1, '2024-01-01', 7),
+(1, 1, '2024-04-12', 5),
+(2, 2, '2024-01-05', 3);
 
 -- inserción de proveedores
 Insert into Proveedor (Nombre, Telefono, Email, Direccion) values

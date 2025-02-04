@@ -1,3 +1,5 @@
+use OvercameDB;
+/*
 -- Clasificación de Usuarios y Privilegios
 -- Usuario Administrador: Acceso completo.
 create user 'admin'@'localhost' identified by 'admin123';
@@ -13,8 +15,10 @@ create user 'cliente'@'localhost' identified by 'cliente123';
 grant select on OvercameDB.Productos to 'cliente'@'localhost';
 grant select, insert on OvercameDB.Reserva to 'cliente'@'localhost';
 
+*/
 -- Procedimiento Almacenado: Resumen de reservas por cliente
 DELIMITER $$
+drop procedure if exists ResumenReservasPorCliente$$
 create procedure ResumenReservasPorCliente()
 begin
   declare done int default 0;
@@ -37,8 +41,11 @@ begin
 end $$
 DELIMITER ;
 
+-- call ResumenReservasPorCliente();
+
 -- Función Almacenada: Calcular el total de reservas para un coche
-DELIMITER $$
+/*DELIMITER $$
+drop function if exists totalReservasCoche$$
 create function totalReservasCoche(cocheId int) returns int
 deterministic
 begin
@@ -48,8 +55,11 @@ begin
 end $$
 DELIMITER ;
 
+select totalReservasCoche(4);
+*/
 -- Trigger: Validar precios antes de insertar en la tabla Productos
 DELIMITER $$
+drop trigger if exists ValidarPrecioProducto$$
 create trigger ValidarPrecioProducto
 before insert on Productos
 for each row
@@ -60,6 +70,20 @@ begin
 end $$
 DELIMITER ;
 
+-- Calcular precio alquiler total de una reserva:
+DELIMITER $$
+drop trigger if exists CalcularPrecioReserva$$
+create trigger CalcularPrecioReserva
+before insert on reserva
+for each row
+begin
+declare precio decimal;
+	set precio = (select PrecioAlquiler from Coche where IdCoche = new.IdCoche);
+	set new.PrecioAlquiler = precio * new.Duracion;
+end $$
+DELIMITER ;
+ insert into Reserva(idCliente, idCoche, FechaInicio, Duracion) values (1, 2, current_date, 3);
+ 
 -- Evento: Actualizar precios promedio de servicios cada semana
 DELIMITER $$
 create event ActualizarPromedioServicios
@@ -71,6 +95,28 @@ begin
 end $$
 DELIMITER ;
 
+-- Crear
+create table Resultados (
+	Año year, 
+    Mes tinyint unsigned check(mes between 1 and 12),
+    TotalGanaciasAlquileres decimal
+); 
+
+SET GLOBAL event_scheduler=ON;
+
+delimiter $$
+drop event if exists GananciasAlquiler$$
+create event GananciasAlquiler
+on schedule every 1 month
+do
+begin
+declare total decimal;
+	set total = (select SUM(PrecioAlquiler) from Reserva where FechaInicio >= DATE_SUB(current_date, INTERVAL 1 month) and FechaInicio <= current_date());
+    insert into Resultados values (year(current_date), month(current_date), total);
+end$$
+delimiter $$
+
+event schedule 
 -- Verificación de usuarios y privilegios
 show grants for 'admin'@'localhost';
 show grants for 'empleado'@'localhost';
